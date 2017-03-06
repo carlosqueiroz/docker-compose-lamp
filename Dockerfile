@@ -6,7 +6,7 @@ ENV httpd_conf ${code_root}/httpd.conf
 
 RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
 RUN rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
-RUN yum install -y httpd
+RUN yum install -y httpd nano curl php56-imap php5-curl php-gd  php56-common
 RUN yum install --enablerepo=epel,remi-php56,remi -y \
                               php \
 							  php-imap\
@@ -18,7 +18,8 @@ RUN yum install --enablerepo=epel,remi-php56,remi -y \
                               php-pdo \
                               php-xml \
                               php-xdebug
-RUN sed -i -e "s|^;date.timezone =.*$|date.timezone = Asia/Tokyo|" /etc/php.ini
+RUN sed -i -e "s|^;date.timezone =.*$|date.timezone = America/Sao_Paulo|" /etc/php.ini
+RUN sed -i -e "s/upload_max_filesize\s*=\s*6M/upload_max_filesize = 200M/g" /etc/php.ini
 
 ADD . $code_root
 RUN test -e $httpd_conf && echo "Include $httpd_conf" >> /etc/httpd/conf/httpd.conf
