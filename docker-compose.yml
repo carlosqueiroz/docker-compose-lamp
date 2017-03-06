@@ -11,5 +11,5 @@ db:
   volumes:
     - ./mysql:/etc/mysql/conf.d
   environment:
-    MYSQL_ROOT_PASSWORD: phpapptest
-    MYSQL_DATABASE: phpapp
+    MYSQL_ROOT_PASSWORD: suitecrm
+    MYSQL_DATABASE: suitecrm
